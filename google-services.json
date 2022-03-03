@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "233916106389",
+    "project_id": "emapad",
+    "storage_bucket": "emapad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:233916106389:android:17eed0c3f259113d1cbd9c",
+        "android_client_info": {
+          "package_name": "com.emapad.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "233916106389-qjr9g9chvao8durvonvvu191iu80qldp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKRedxVT39QKNPS_pVxhlEFKg-woTyh6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "233916106389-qjr9g9chvao8durvonvvu191iu80qldp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
