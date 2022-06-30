@@ -5,7 +5,7 @@ import axios from 'axios'
 import {CustomHeader} from '../index'
 import variables from '../global/variables.js';
 
-export class verification extends React.Component {
+export class VERIFICATION extends React.Component {
 
         state = {
             setData: [],

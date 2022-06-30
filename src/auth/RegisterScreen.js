@@ -7,43 +7,32 @@ import * as Notifications from 'expo-notifications';
 import * as Permission from "expo-permissions";
 import variables from '../global/variables.js';
 
-const getToken = async() => {
-
-  const token = (await Notifications.getExpoPushTokenAsync()).data;
-  tokens = token;
-  return token;
-}
 
 export class RegisterScreen extends React.Component {
 
-  componentDidMount() {
-    getToken();
-    
-  }
+
         state = {
             setData: [],
             getcedula:'',
             getcorreo:'',
             getpass:'',
             validated : false,
+            toke: ''
         }
      
     render() {
       const register = async() => {
-        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (reg.test(this.state.getcorreo)===true) {
+        const token = (await Notifications.getExpoPushTokenAsync()).data;
+
         const cedula = this.state.getcedula;
         const correo = this.state.getcorreo;
         const password = this.state.getpass;
-        const token = tokens;
         const obj = {"cedula" : cedula,"correo" : correo, "password" : password, "token":token}
         const respuesta = await axios.post('http://clientes.emapad.gob.ec/Manager/usuario.php/',obj);
         const validacion = respuesta.data.msg;
         this.props.navigation.navigate('Login')
         alert(validacion);
-        } else {
-            alert('Correo no valido');
-        }
+        
       } 
 
 

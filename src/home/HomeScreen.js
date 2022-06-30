@@ -5,6 +5,8 @@ import Swiper from 'react-native-swiper'
 import axios from 'axios'
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Animatable from 'react-native-animatable';
+
 ///Guardado en Memoria
 
 const STORAGE_KEY_NAME = 'cedula_usuario'
@@ -56,8 +58,8 @@ export class HomeScreen extends Component {
 
   
                 <CustomHeader title="EMAPAD-EP" isHome={true} navigation={this.props.navigation}/>
-                <Text style={styles.texto}>{'Bienvenido'}</Text>
-                <Text style={styles.name}>{nombre}</Text>
+                <Animatable.Text animation="fadeInRightBig" style={styles.texto}>{'Bienvenido'}</Animatable.Text>
+                <Animatable.Text animation="fadeInRightBig" style={styles.name}>{nombre}</Animatable.Text>
                 <View style={styles.top}>
 
                 <TouchableOpacity
@@ -106,9 +108,7 @@ export class HomeScreen extends Component {
                         </View>
                     </Swiper>
                 </View>
-                <View style={styles.abajo}>                
-                    <Image style={styles.barner} source={require('../assets/barner.png')}/>
-                </View>
+       
                 
                 </ImageBackground>    
                     );
@@ -117,10 +117,7 @@ export class HomeScreen extends Component {
 const styles = StyleSheet.create(
     {
         container:{
-            flex:1,
-            justifyContent:'center',
-            alignItems: 'center',
-            alignContent:'center'
+            flex:1
         },
   
         button_icon:{
@@ -137,13 +134,13 @@ const styles = StyleSheet.create(
             paddingHorizontal: 0,
             paddingVertical: 10,
             borderRadius: 4,
-            backgroundColor: "rgba(183,183,183,0.7)",
-            alignSelf: "flex-start",
+            backgroundColor: "rgba(183,183,183,0.5)",
             marginHorizontal: "1%",
             marginBottom: 6,
             justifyContent:'center',
             alignItems:'center',
             alignContent:'center',
+            textAlign:'center',
             flex:2,
 
                     },
@@ -161,7 +158,9 @@ const styles = StyleSheet.create(
         sub:{
             maxHeight:'80%',
             height: '50%',
-            width: Dimensions.get ('window').width,
+            width: Dimensions.get ('window').width-10,
+            marginLeft:5,
+            marginRight:5
 
 
         },
@@ -228,7 +227,8 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
             justifyContent:'center',
             alignItems: 'center',
-            alignContent:'center'
+            alignContent:'center',
+            marginBottom:10
         },
         icon:{
             width: 40,

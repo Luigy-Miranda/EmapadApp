@@ -24,7 +24,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEY_NAME = 'cedula_usuario'
 
-export class update extends Component {
+export class UPDATE extends Component {
     constructor(props) {
         super(props);
         this.state = {

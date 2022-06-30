@@ -5,12 +5,7 @@ import { KeyboardAvoidingView } from 'react-native';
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
-const getToken = async() => {
 
-    const token = (await Notifications.getExpoPushTokenAsync()).data;
-    tokens = token;
-    return token;
-  }
 
 /////Guardado en Memoria 
 
@@ -19,10 +14,7 @@ const STORAGE_KEY_NAME = 'cedula_usuario'
 
 
 export class LoginScreen extends Component {
-    componentDidMount() {
-        getToken();
-        
-      }
+
     constructor(props) {
         super(props);
         
@@ -51,7 +43,9 @@ export class LoginScreen extends Component {
     const login_x = async() => {
         const cedula = this.state.user;
         const password = this.state.pass;
-        const token = tokens;
+        const token = (await Notifications.getExpoPushTokenAsync()).data;
+
+        console.log(token);
         const obj = {"cedula" : cedula, "password" : password, "token" :token}
         const respuesta = await axios.post('http://clientes.emapad.gob.ec/Manager/usuario.php/',obj);
         const validacion = respuesta.data.msg;

@@ -41,7 +41,7 @@ const DATA = [
   );
   
 
-export class coactiva extends Component {
+export class COACTIVA extends Component {
     constructor(props) {
         super(props);
         this.state = {

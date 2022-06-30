@@ -21,7 +21,7 @@ const STORAGE_KEY_NAME = 'cedula_usuario'
 
 
 
-export class convenio extends Component {
+export class CONVENIO extends Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -22,7 +22,7 @@ const STORAGE_KEY_NAME = 'cedula_usuario'
 
 
 
-export class profile extends Component {
+export class PROFILE extends Component {
     constructor(props) {
         super(props);
         this.state = {

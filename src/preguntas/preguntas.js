@@ -51,7 +51,7 @@ const DATA = [
     </View>
   );
   
-export class preguntas extends Component {
+export class PREGUNTAS extends Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -7,7 +7,7 @@ import variables from '../global/variables.js';
 import CheckBox from 'react-native-check-box'
 
 
-export class reclamos extends Component {
+export class RECLAMOS extends Component {
     state = {
         descripcion:'',
         isChecked: false,
