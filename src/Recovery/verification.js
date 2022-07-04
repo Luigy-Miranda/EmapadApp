@@ -4,6 +4,8 @@ import { Text, View,TouchableOpacity,ImageBackground , Image,Dimensions,StyleShe
 import axios from 'axios'
 import {CustomHeader} from '../index'
 import variables from '../global/variables.js';
+import { LinearGradient } from "expo-linear-gradient"; 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export class VERIFICATION extends React.Component {
 
@@ -16,61 +18,43 @@ export class VERIFICATION extends React.Component {
      
     render() {
         const recovery = async() => {
-            if (this.state.getcedula == ran){
-                this.props.navigation.navigate('password');
+           if (this.state.getcedula == ran){
+                this.props.navigation.navigate('PASSWORD')
             }else{
                 alert('El codigo no es correcto.');
             }
           } 
-    
-
-
         return (
-            <ImageBackground  source={require('../assets/wallpaper_factura.png')} style={styles.con} >
-          
-            <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.container}
-          >
-            <CustomHeader title="Registrate" navigation={this.props.navigation} />
-
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-           
-            <View style={styles.inner}>
-            <Text style={styles.PageTitle}>Recuperar contraseña</Text>
-            <Text style={styles.back}>Ingrese el codigo que fue enviado a su correo para continuar.</Text>
-
-
-                    <TextInput
-                        style={styles.input}
-                        onChangeText = {(value) => this.setState ({getcedula: value})}
-                        placeholder="Codigo"
-                        keyboardType="numeric"
-                    />
-                
-                <TouchableOpacity
-                style={styles.button}
-                onPress={recovery}   
-                >
-                <Image style={styles.logo} source={require('../assets/icons/recovery.png')}/> 
-                <Text> Restablecer contraseña</Text>
-                </TouchableOpacity>
-
-
-
-                <TouchableOpacity
-            
-                onPress={() => this.props.navigation.navigate('Recovery')}   
-                >
-                <Text style={styles.back1}> Reenviar codigo</Text>
-                </TouchableOpacity>
-            
-            </View>
-  
-            </TouchableWithoutFeedback>
-
-        </KeyboardAvoidingView>
-    </ImageBackground>
+        <ImageBackground  source={require('../assets/fondo.jpg')} style={styles.con} >
+            <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={{height:'100%'}} >
+                <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.container}>
+                    <CustomHeader title="Registrate" navigation={this.props.navigation} />
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View style={styles.inner}>
+                            <Text style={styles.PageTitle}>Recuperar contraseña</Text>
+                            <Text style={styles.back}>Ingrese el codigo que fue enviado a su correo para continuar.</Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText = {(value) => this.setState ({getcedula: value})}
+                                placeholder="Codigo"
+                                keyboardType="numeric"
+                                placeholderTextColor="#000"
+                                underlineColorAndroid="transparent"
+                            />
+                            <TouchableOpacity style={styles.button} onPress={recovery}>
+                                <MaterialCommunityIcons name="account-lock-open-outline" color='#fff' size={30} />
+                                <Text style={{color:'#fff',fontWeight: 'bold',}}> Restablecer contraseña</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Recovery')} >
+                                <Text style={styles.back1}> Reenviar codigo</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </KeyboardAvoidingView>
+            </LinearGradient>
+        </ImageBackground>
         );
     }
 }
@@ -95,7 +79,6 @@ const styles = StyleSheet.create(
         },
         inner:{    
             padding: 24,
-            backgroundColor: "rgba(255, 255, 255,1)",
             borderRadius:10,
             width:Dimensions.get ('window').width-30,
             justifyContent: "space-around"
@@ -105,20 +88,28 @@ const styles = StyleSheet.create(
         button:{
             flexDirection: "row", 
             alignItems: "center",
-            backgroundColor: "rgba(215, 223, 227, 1)",
+            backgroundColor: "#22BB00",
             padding: 10,
             borderRadius:10,
-            color: '#FFFFFF',
-            height: 40,
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 11,
+            },
+            shadowOpacity: 0.55,
+            shadowRadius: 14.78,
+
+            elevation: 22,
         },
  
         input: {
-            height: 40,
-            borderColor: "#134553",
-            borderBottomWidth: 2,
+            borderColor: "#fff",
+            borderWidth: 2,
+            borderRadius:5,
             marginBottom:30,
-            borderRadius:8,
             fontSize: 20,
+            padding:10,
+            backgroundColor:'#fff',
 
           },
           
@@ -126,21 +117,23 @@ const styles = StyleSheet.create(
             fontSize:25,
             alignItems: 'center',
             fontWeight: 'bold',
-            color: '#134553',
+            color: '#FFFFFF',
             marginBottom: 10,
             
 
         },
         back1:{
-            color: '#808B96',
+            color: '#FFFFFF',
             marginTop:30,
             fontSize: 20,
+            fontWeight: 'bold',
 
         },        
         back:{
-            color: '#808B96',
+            color: '#FFFFFF',
             marginBottom:30,
             fontSize: 20,
+            fontWeight: 'bold',
 
         }
     }

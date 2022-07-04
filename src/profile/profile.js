@@ -14,6 +14,7 @@ import React, { useState, useEffect, useRef, Component } from 'react';
 import axios from 'axios';
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 ///Guardado en Memoria
 
@@ -34,7 +35,7 @@ export class PROFILE extends Component {
         
         const consul = async() => {
         const cedula = await AsyncStorage.getItem(STORAGE_KEY_NAME);
-        const respuesta = await axios.get('http://clientes.emapad.gob.ec/Manager/usuario.php?id='+cedula);   
+        const respuesta = await axios.get('http://181.196.241.243/Manager/usuario.php?id='+cedula);   
         const v = respuesta.data;
         this.setState({setData : respuesta.data});
         email=respuesta.data.correo;
@@ -53,62 +54,59 @@ export class PROFILE extends Component {
                 <CustomHeader title="Facturas" navigation={this.props.navigation}/>
                 <View style={styles.ban}>
                     <View style={styles.ima}>
-                        <Image style={styles.profileimage} source={require('../assets/icons/user.png')}/> 
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => this.props.navigation.navigate('update')}
-                            >
-                            <Text>Actualizar datos </Text>
-                            <Image style={styles.Icons} source={require('../assets/icons/edit.png')}/>          
-
-                        </TouchableOpacity>            
+                        <MaterialCommunityIcons name="account-circle" color='#fff' size={100} />
+                        <View style={styles.top}>
+                            <Text style={styles.nombre}>{this.state.setData['NOMBRES']}</Text>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => this.props.navigation.navigate('update')}
+                                >
+                                <MaterialCommunityIcons name="content-save-edit-outline" color='#fff' size={30} />  
+                                <Text style={{color:'#fff', fontSize:15, marginLeft:10}}>Actualizar datos</Text>
+                            </TouchableOpacity>       
+                        </View>
                     </View>
-                <View style={styles.top}>
-                    <Text style={styles.nombre}>{this.state.setData['NOMBRES']}</Text>
-                </View>
-                <View style={styles.bottom}>
+                    <Text style={styles.nombre}>Datos personales del cliente</Text>
+
+                    <View style={styles.bottom}>
                         <View style={styles.bottomItemIneer}>
                             <View style={styles.texti}> 
-                            <Image style={styles.Logo} source={require('../assets/icons/number.png')}/> 
-                                <Text style={styles.textotitulo}> Numero del Servicio: </Text>
+                                <MaterialCommunityIcons name="shield-check" color='#fff' size={30} />
+                                <Text style={styles.textotitulo}> Número del Servicio: </Text>
                             </View>
                             <View style={styles.texti}>
                                 <Text style={styles.SubText}>{this.state.setData['SERVICIO']}</Text>
                             </View>
                             <View style={styles.texti}>
-                                <Image style={styles.Logo} source={require('../assets/icons/ubication.png')}/> 
-                                <Text style={styles.textotitulo}> Direccion:</Text>
+                                <MaterialCommunityIcons name="map-marker-account" color='#fff' size={30} />
+                                <Text style={styles.textotitulo}> Dirección:</Text>
                             </View>
                             <View style={styles.texti}>
                                     <Text style={styles.SubText}>{this.state.setData['DIRECCION']}</Text>
                             </View>
                             <View style={styles.texti}>
-                                <Image style={styles.Logo} source={require('../assets/icons/email.png')}/> 
+                                <MaterialCommunityIcons name="email" color='#fff' size={30} />
                                 <Text style={styles.textotitulo}> Correo: </Text>
                             </View>
                             <View style={styles.texti}>
                                 <Text style={styles.SubText}>{this.state.setData['correo']}</Text>
                             </View>
                             <View style={styles.texti}>
-                                <Image style={styles.Logo} source={require('../assets/icons/phone.png')}/> 
+                                <MaterialCommunityIcons name="phone" color='#fff' size={30} />
                                 <Text style={styles.textotitulo}> Celular:</Text>
                             </View>
                             <View style={styles.texti}>
                                 <Text style={styles.SubText}>{this.state.setData['celular']}</Text>
                             </View>
                             <View style={styles.texti}>
-                                <Image style={styles.Logo} source={require('../assets/icons/location.png')}/> 
+                                <MaterialCommunityIcons name="map-outline" color='#fff' size={30} />
                                 <Text style={styles.textotitulo}> Zona: </Text>
                             </View>
                             <View style={styles.texti}>
-                                <Text style={styles.SubText}>{this.state.setData['SECDES']}</Text>
-                                
+                                <Text style={styles.SubText}>{this.state.setData['SECDES']}</Text> 
                             </View>
-
                         </View>                    
-                </View>
-   
-
+                    </View>
                 </View>
      
             </ImageBackground>
@@ -125,49 +123,38 @@ const styles = StyleSheet.create(
 
         },
         top:{
-            flexDirection:'row',
             justifyContent: 'center',
+            flex:1,
             borderRadius: 10,
-            backgroundColor:'rgba(255,255,255, 0.5)',
             width:Dimensions.get ('window').width-30,
             paddingLeft: 15,
             paddingBottom: 10
 
         },  
         ima:{
-            alignItems:'flex-end',
             flexDirection:'row',
-            flexWrap: 'wrap',
+            alignItems:'center'
 
         },
-        Icons:{
-            width:25,
-            height:25,
-        },  
+ 
         button:{
             alignItems: "center",
-            backgroundColor: "rgba(73, 174, 249,1)",
-            padding: 10,
-            margin: 12,
+            textAlign:'center',
+            backgroundColor: "rgba(1, 5, 9,0.6)",
+            padding: 5,
+            marginTop:10,
             borderRadius:8,
             borderWidth:1,
             borderColor:'#FFFFFF',
             flexDirection: 'row',     
+ 
 
         },
         ban:{
             paddingLeft: 15,
             width:Dimensions.get ('window').width-30,
         },
-        profileimage:{
-            width: 75,
-            height: 75,
-            borderRadius: 100,
-            borderWidth: 4,
-            backgroundColor: '#eee',
-            borderColor: '#FFFFFF',
 
-        },
 
         center:{
             height:'10%',
@@ -179,31 +166,29 @@ const styles = StyleSheet.create(
         bottom:{
             marginTop:10 ,
             width:Dimensions.get ('window').width-30,
-            maxHeight:'70%',
+         
             flexDirection:'row',
-            flexWrap: 'wrap',
             paddingLeft: 15,
             borderRadius: 10,
-            backgroundColor:'rgba(232, 232, 232,0.5)',
+            backgroundColor:'rgba(232, 232, 232,0.2)',
         },
         bottomItem:{
-flex:1,
-height: 100
+          
         },
         nombre:{
             fontWeight: 'bold',
             fontSize:20,
-            marginTop: 10,
+            color: '#FFFFFF',
 
         },  
         bottomItemIneer:{
-            flex:1,
-       
+            padding:5
         }, 
         texti:{
             flexDirection: 'row',
             marginTop: 5,
-            marginBottom:2
+            marginBottom:2,
+            color: '#D9D9D9',
 
         
         },
@@ -213,7 +198,7 @@ height: 100
         },
         SubText:{
             fontSize:20,
-            color: '#FFFFFF',
+            color: '#BDCCD3',
             fontWeight: 'bold',
 
         }, 
@@ -221,6 +206,7 @@ height: 100
             fontSize:20,
             fontWeight: 'bold',
             padding: 1,
+            color:'#ECECEC'
         },
         com:{
             fontSize:15,

@@ -52,7 +52,7 @@ export class COACTIVA extends Component {
     obtener (){
         const consul = async() => {
             const cedula = await AsyncStorage.getItem(STORAGE_KEY_NAME);
-            const respuesta = await axios.get('http://clientes.emapad.gob.ec/Manager/usuario.php?id='+cedula);   
+            const respuesta = await axios.get('http://181.196.241.243/Manager/usuario.php?id='+cedula);   
             const v = respuesta.data;
             this.setState({setData : respuesta.data});
     }

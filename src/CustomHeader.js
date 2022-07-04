@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Text, View, SafeAreaView, Image, TouchableOpacity, ScrollView,StyleSheet } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const {Value, timing} = Animated
@@ -12,22 +13,18 @@ export class CustomHeader extends Component {
             <View style={{flex: 1, justifyContent: 'center'}}>
                 {
                 isHome ?
-                <TouchableOpacity style={{flexDirection:'row', marginLeft:5}} onPress={() => navigation.openDrawer()}>
-                    <Image style={{width: 30, height: 30, marginRight:5}}
-                    source={require('./assets/icons/menu.png')}
-                    resizeMode="contain"/>
+                <TouchableOpacity style={{flexDirection:'row', marginLeft:5, alignItems:'center'}} onPress={() => navigation.openDrawer()}>
+                    <MaterialCommunityIcons name="reorder-horizontal" color='#FFFFFF' size={30} />
                     <Text style={{color:'#FFFFFF',fontWeight:'bold', fontSize:18}}>Menu</Text>
                 </TouchableOpacity>
                 :
                 <TouchableOpacity 
-                style={{flexDirection: 'row', alignItems: 'center'}}
+                style={{flexDirection: 'row', alignItems: 'center', padding:10}}
                 onPress={() => navigation.goBack()}
                 >
-                    <Image style={{width: 30, height: 30, marginLeft: 5}}
-                    source={require('./assets/icons/back.png')}
-                    resizeMode="contain"
-                    />
-                    <Text style={{fontWeight:'bold', color:'#FFFFFF'}}>Atras</Text>
+                          <MaterialCommunityIcons name="chevron-left-circle" color='#888888' size={30} />
+
+                    <Text style={{fontWeight:'bold', color:'#FFFFFF', marginLeft:10}}>Atras</Text>
                 </TouchableOpacity>
                 }
             </View>  

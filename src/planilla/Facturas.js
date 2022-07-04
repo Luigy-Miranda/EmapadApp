@@ -35,7 +35,7 @@ export class Facturas extends Component {
         const cedula = await AsyncStorage.getItem(STORAGE_KEY_NAME);
         const cod = cedula;
         const obj = {"codigo" : cod}
-        const respuesta = await axios.post('http://clientes.emapad.gob.ec/Manager/Oracle/',obj);
+        const respuesta = await axios.post('http://181.196.241.243/Manager/Oracle/',obj);
         this.setState({setData : respuesta.data});
 
     }
@@ -48,7 +48,7 @@ export class Facturas extends Component {
         const generar = async() => {
             const messague =  await AsyncStorage.getItem(STORAGE_KEY_NAME);
             //alert(validacion);
-            Linking.openURL('http://clientes.emapad.gob.ec/Manager/usuario.php?planilla='+messague);
+            Linking.openURL('http://181.196.241.243/Manager/usuario.php?planilla='+messague);
           }
         this.obtener()
 

@@ -46,7 +46,7 @@ export class UPDATE extends Component {
             const correo = this.state.correox;
             const celular = this.state.phonex;
             const obj = {"correo" : correo, "celular" : celular,"cedula" : cedula}
-            await axios.post('http://clientes.emapad.gob.ec/Manager/usuario.php/',obj);
+            await axios.post('http://181.196.241.243/Manager/usuario.php/',obj);
             this.props.navigation.navigate('profile');
             }
         return (

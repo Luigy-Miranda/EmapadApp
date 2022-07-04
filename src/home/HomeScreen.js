@@ -6,6 +6,7 @@ import axios from 'axios'
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Animatable from 'react-native-animatable';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 ///Guardado en Memoria
 
@@ -14,7 +15,7 @@ const STORAGE_KEY_NAME = 'cedula_usuario'
     
     const hol = async() => {
         const cedula = await AsyncStorage.getItem(STORAGE_KEY_NAME);
-        const XD = await axios.get('http://clientes.emapad.gob.ec/Manager/usuario.php?id='+cedula);   
+        const XD = await axios.get('http://181.196.241.243/Manager/usuario.php?id='+cedula);   
         const  v = XD.data;
         nombre = v['NOMBRES'];
         codigo = v['SERVICIO'];
@@ -39,7 +40,7 @@ export class HomeScreen extends Component {
   
     obtener (){
         const consul = async() => {
-        const respuesta = await axios.get('http://clientes.emapad.gob.ec/Manager/usuario.php');   
+        const respuesta = await axios.get('http://181.196.241.243/Manager/usuario.php');   
         
         this.setState({setData : respuesta.data});
         
@@ -66,23 +67,24 @@ export class HomeScreen extends Component {
                     style={styles.button}
                     onPress={() => this.props.navigation.navigate('Consulta')}
                     >
-                    <Image style={styles.logo} source={require('../assets/icons/pay.png')}/> 
+                    <MaterialCommunityIcons name="cash-fast" color='#FFFFFF' size={50} />
                     <Text style={styles.logo_text}>{'¡Consulta tu consumo del Agua Potable!'}</Text>
                     </TouchableOpacity>
                     
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.props.navigation.navigate('convenio')}
+                    onPress={() => this.props.navigation.navigate('CONVENIO')}
                     >
-                    <Image style={styles.logo} source={require('../assets/icons/convenio.png')}/> 
+                        
+                    <MaterialCommunityIcons name="account-cash" color='#FFFFFF' size={50} />
                     <Text style={styles.logo_text}>{'¡Consulta tu convenio del Agua Potable!'}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.props.navigation.navigate('coactiva')}
+                    onPress={() => this.props.navigation.navigate('COACTIVA')}
 
                     >
-                    <Image style={styles.logo} source={require('../assets/icons/coactiva.png')}/> 
+                    <MaterialCommunityIcons name="account-question" color='#FFFFFF' size={50} />
                     <Text style={styles.logo_text}>{'¿Problemas con coactiva?  Entra aqui'}</Text>
                     </TouchableOpacity>
                 </View>
@@ -145,15 +147,11 @@ const styles = StyleSheet.create(
 
                     },
         logo_text:{
-            alignItems:'center',
-            marginLeft:20,
-            alignContent:'center',
-            justifyContent:'center',
+            textAlign:'center',
             color: '#FFFFFF',
             fontWeight: 'bold',
+            padding:5,
             fontSize:15,
-            justifyContent:'center',
-
         },
         sub:{
             maxHeight:'80%',

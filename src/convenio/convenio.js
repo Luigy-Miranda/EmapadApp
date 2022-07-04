@@ -37,7 +37,7 @@ export class CONVENIO extends Component {
         ///const cedula = await AsyncStorage.getItem(STORAGE_KEY_NAME);
         const cod = codigo;
         const obj = {"codigo" : cod}
-        const respuesta = await axios.post('http://clientes.emapad.gob.ec/Manager/Oracle/convenios/',obj);
+        const respuesta = await axios.post('http://181.196.241.243/Manager/Oracle/convenios/',obj);
         const v = respuesta.data;
         if (respuesta.data['ANOS'] == "") {
             this.props.navigation.navigate('HomeApp');
@@ -58,63 +58,57 @@ export class CONVENIO extends Component {
         const datos = this.state.setData;
 
 
-
         return (
                 <ImageBackground  source={require('../assets/wallpaper_factura.png')} style={styles.container} >
                 <CustomHeader title="Facturas" navigation={this.props.navigation}/>
 
                     <View style={styles.container1}>
-
-                    <View style={styles.xd}>
-                    <Image style={styles.guardian} source={require('../assets/lo.png')}/>
+                        <View style={styles.xd}>
+                            <Image style={styles.guardian} source={require('../assets/lo.png')}/>
+                        </View>
+                        <Text style={styles.Titulo_con}>Mi convenio</Text>
+                        {datos != '' ?
+                        <View style={styles.xd}>
+                            <View style={styles.xp}>
+                                <Text style={styles.Titulo}>Año</Text>
+                                <FlatList 
+                                    data={datos['ANOS']}
+                                    renderItem={({item}) => {
+                                        return <Text style={styles.PageText}>{item}</Text>
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.xp}>
+                                <Text style={styles.Titulo}>Mes</Text>
+                                <FlatList 
+                                    data={datos['MESES']}
+                                    renderItem={({item}) => {
+                                    return <View><Text style={styles.PageText}>{item}</Text></View>
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.xp}>
+                                <Text style={styles.Titulo}>Valores</Text>
+                                <FlatList 
+                                    data={datos['VALORESS']}
+                                    renderItem={({item}) => {
+                                    return <View><Text style={styles.PageText}>$ {item}</Text></View>
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.xp}>
+                                <Text style={styles.Titulo}>Estado</Text>
+                                <FlatList 
+                                    data={datos['ESTADOs']}
+                                    renderItem={({item}) => {
+                                    return <View><Text style={styles.PageText}>$ {item}</Text></View>
+                                    }}
+                                />
+                            </View>
+                        </View>
+                        :<Text style={styles.PageText}>No hay convenio existente</Text>}
                     </View>
-                    <Text style={styles.Titulo_con}>Mi convenio</Text>
-
-                                    <View style={styles.xd}>
-
-                                        <View style={styles.xp}>
-                                            <Text style={styles.Titulo}>Año</Text>
-                                            <FlatList 
-                                                data={datos['ANOS']}
-                                                renderItem={({item}) => {
-                                                    return <Text style={styles.PageText}>{item}</Text>
-                                                }}
-                                                />
-                                        </View>
-                                        <View style={styles.xp}>
-                                            <Text style={styles.Titulo}>Mes</Text>
-                                                <FlatList 
-                                                data={datos['MESES']}
-                                                renderItem={({item}) => {
-                                                    return <View><Text style={styles.PageText}>{item}</Text></View>
-                                                }}
-                                                />
-                                        </View>
-                                    <View style={styles.xp}>
-                                        <Text style={styles.Titulo}>Valores</Text>
-                                                    <FlatList 
-                                            data={datos['VALORESS']}
-                                            renderItem={({item}) => {
-                                                return <View><Text style={styles.PageText}>$ {item}</Text></View>
-                                            }}
-                                            />
-              
-                                    </View>
-                                    <View style={styles.xp}>
-                                        <Text style={styles.Titulo}>Estado</Text>
-                                                    <FlatList 
-                                            data={datos['ESTADOs']}
-                                            renderItem={({item}) => {
-                                                return <View><Text style={styles.PageText}>$ {item}</Text></View>
-                                            }}
-                                            />
-                                    </View>
-                                    </View>
-                                    </View>
-
-
                 </ImageBackground>
-
         );
     }
 }

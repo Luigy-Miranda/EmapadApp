@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Text, View, SafeAreaView, Image, TouchableOpacity, ScrollView,StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const STORAGE_KEY_NAME = 'cedula_usuario'
 
@@ -37,51 +38,54 @@ export class CustomDrawerContent extends Component {
                 style={{marginLeft: 10, backgroundColor:'#F4F4F4',borderWidth: 2, borderRadius:8, padding: 5,borderColor: '#FFFFFF'}}
                 onPress={() => this.props.navigation.navigate('MenuTab')}
                 >
-                <Image  style={{width: 30, height: 30}} source={require('./assets/icons/home.png')}/>  
-                <Text>Inicio</Text>
+                    <MaterialCommunityIcons name="home-variant-outline" color='#888888' size={30} />
+                    <Text>Inicio</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={{ marginLeft: 10, backgroundColor:'#F4F4F4',borderWidth: 2, borderRadius:8, padding: 5,borderColor: '#FFFFFF'}}
-                onPress={() => this.props.navigation.navigate('profile')}
+                onPress={() => this.props.navigation.navigate('PROFILE')}
                 >
-                <Image  style={{width: 25, height: 25}} source={require('./assets/icons/user.png')}/>  
+                    <MaterialCommunityIcons name="account-circle" color='#888888' size={30} />
                 <Text>Mi Perfil</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={{ marginLeft: 10, backgroundColor:'#F4F4F4',borderWidth: 2, borderRadius:8, padding: 5,borderColor: '#FFFFFF'}}
                 onPress={() => this.props.navigation.navigate('Consulta')}
                 >
-                <Image  style={{width: 25, height: 25}} source={require('./assets/icons/pay.png')}/>  
+                    <MaterialCommunityIcons name="cash-fast" color='#888888' size={30} />
                 <Text>Consultar/Generar Planilla</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={{ marginLeft: 10, backgroundColor:'#F4F4F4',borderWidth: 2, borderRadius:8, padding: 5,borderColor: '#FFFFFF'}}
-                onPress={() => this.props.navigation.navigate('convenio')}
+                onPress={() => this.props.navigation.navigate('CONVENIO')}
                 >
-                <Image  style={{width: 25, height: 25}} source={require('./assets/icons/convenio.png')}/>  
+                    
+                    <MaterialCommunityIcons name="account-cash" color='#888888' size={30} />
                 <Text>Consultar Convenios</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={{ marginLeft: 10, backgroundColor:'#F4F4F4',borderWidth: 2, borderRadius:8, padding: 5,borderColor: '#FFFFFF'}}
-                onPress={() => this.props.navigation.navigate('reclamos')}
+                onPress={() => this.props.navigation.navigate('RECLAMOS')}
                 >
-                <Image  style={{width: 25, height: 25}} source={require('./assets/icons/notification.png')}/>  
+                    
+                    <MaterialCommunityIcons name="comment-multiple-outline" color='#888888' size={30} />
                 <Text>Atención/Contacto</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={{ marginLeft: 10, backgroundColor:'#F4F4F4',borderWidth: 2, borderRadius:8, padding: 5,borderColor: '#FFFFFF'}}
-                onPress={() => this.props.navigation.navigate('preguntas')}
+                onPress={() => this.props.navigation.navigate('PREGUNTAS')}
                 >
-                <Image  style={{width: 25, height: 25}} source={require('./assets/icons/cuestion.png')}/>  
+                    <MaterialCommunityIcons name="account-question" color='#888888' size={30} />
                 <Text>Preguntas Frecuentes</Text>
                 </TouchableOpacity>
             </ScrollView>
 
                 <TouchableOpacity
-                style={{marginTop: 10, marginLeft: 10, marginBottom: 30}}
+                style={{ marginLeft: 10, marginBottom: 5, backgroundColor:'#F4F4F4',borderWidth: 2, borderRadius:8, padding: 5,borderColor: '#FFFFFF'}}
                 onPress={removeValue}
                 >
-                <Image  style={{width: 25, height: 25}} source={require('./assets/icons/logout.png')}/>  
+                    
+                    <MaterialCommunityIcons name="chevron-left-circle" color='#888888' size={30} />
                 <Text>Cerrar Sesión</Text>
                 </TouchableOpacity>
             </SafeAreaView>

@@ -19,7 +19,7 @@ import {PREGUNTAS} from './src/preguntas/'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CONVENIO} from './src/convenio';
 
-///import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,13 +33,28 @@ function Ati_B() {
       <Tab.Navigator>
         <Tab.Screen name="Inicio" component={HomeScreen} 
         options={{
-          tabBarLabel: 'Profile',
+          headerShown: false,
+          tabBarLabel: 'Inicio',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home-variant-outline" color={color} size={size} />
+          ),
+        }}/>
+        <Tab.Screen name="Mensajeria" component={RECLAMOS} 
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Mensajeria',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="comment-multiple-outline" color={color} size={size} />
+          ),
+        }}/>
+        <Tab.Screen name="Profile" component={PROFILE} 
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Perfil',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}/>
-        <Tab.Screen name="Mensajeria" component={RECLAMOS} options={navOptionHandler}/>
-        <Tab.Screen name="Profile" component={PROFILE} options={navOptionHandler}/>
 
       </Tab.Navigator>
   );
@@ -52,7 +67,7 @@ function DrawerNavigator({navigation}) {
   return (
     
     <Drawer.Navigator initialRouteName="MenuTab" 
-      drawerContent={() => <CustomDrawerContent navigation={navigation}/>}>
+        drawerContent={() => <CustomDrawerContent navigation={navigation}/>}>
         <Drawer.Screen name="MenuTab" component={HomeScreen} options={navOptionHandler} />
         <Drawer.Screen name="Consulta" component={Facturas} options={navOptionHandler}/>
         <Drawer.Screen name="PROFILE" component={PROFILE} options={navOptionHandler}/>
@@ -74,7 +89,7 @@ export default function App() {
         <NavigationContainer>
 
             <StackApp.Navigator initialRouteName="Login">
-              <StackApp.Screen name="HomeApp" component={Ati_B}  options={navOptionHandler}/>
+              <StackApp.Screen name="HomeApp" component={DrawerNavigator}  options={navOptionHandler}/>
               <StackApp.Screen name="Login" component={LoginScreen} options={navOptionHandler}/>
               <StackApp.Screen name="Register" component={RegisterScreen} options={navOptionHandler}/>
               <StackApp.Screen name="RECLAMOS" component={RECLAMOS} options={navOptionHandler}/>

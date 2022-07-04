@@ -4,6 +4,8 @@ import { Text, View,TouchableOpacity,ImageBackground , Image,Dimensions,StyleShe
 import axios from 'axios'
 import {CustomHeader} from '../index'
 import variables from '../global/variables.js';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from "expo-linear-gradient"; 
 
 
 export class Recovery extends React.Component {
@@ -20,16 +22,16 @@ export class Recovery extends React.Component {
         ced = cedula; 
         ran = codigo;
         const obj = {"cedula" : cedula, "codigo": codigo}
-        const respuesta = await axios.post('http://clientes.emapad.gob.ec/Manager/Recovery/index.php/',obj);
+        const respuesta = await axios.post('http://181.196.241.243/Manager/Recovery/index.php/',obj);
         const validacion = respuesta.data;
-            this.props.navigation.navigate('verification');
-
+        this.props.navigation.navigate('VERIFICATION');
       } 
 
 
         return (
-            <ImageBackground  source={require('../assets/wallpaper_factura.png')} style={styles.con} >
-          
+            <ImageBackground  source={require('../assets/fondo.jpg')} style={styles.con} >
+                <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={{height:'100%'}} >
+
             <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
@@ -39,23 +41,19 @@ export class Recovery extends React.Component {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
            
             <View style={styles.inner}>
-            <Text style={styles.PageTitle}>Recuperar contraseña</Text>
-            <Text style={styles.back}>Se enviara un correo para restablecer la clave. porfavor ingrese su numero de cedula registrada en la APP.</Text>
-
-
-                    <TextInput
-                        style={styles.input}
-                        onChangeText = {(value) => this.setState ({getcedula: value})}
-                        placeholder="Cedula"
-                        keyboardType="numeric"
-                    />
-                
-                <TouchableOpacity
-                style={styles.button}
-                onPress={recovery}   
-                >
-                <Image style={styles.logo} source={require('../assets/icons/recovery.png')}/> 
-                <Text> Restablecer contraseña</Text>
+                <Text style={styles.PageTitle}>Recuperar contraseña</Text>
+                <Text style={styles.back}>Se enviara un correo para restablecer la clave. porfavor ingrese su numero de cedula registrada en la APP.</Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText = {(value) => this.setState ({getcedula: value})}
+                    placeholder="Ingrese su cedula"
+                    keyboardType="numeric"
+                    placeholderTextColor="#000"
+                    underlineColorAndroid="transparent"
+                />
+                <TouchableOpacity style={styles.button} onPress={recovery}>
+                    <MaterialCommunityIcons name="account-lock-open-outline" color='#fff' size={30} />
+                    <Text style={{fontSize:17, fontWeight:'bold', color:'#fff'}}> Restablecer contraseña</Text>
                 </TouchableOpacity>
 
 
@@ -67,6 +65,7 @@ export class Recovery extends React.Component {
             </TouchableWithoutFeedback>
 
         </KeyboardAvoidingView>
+        </LinearGradient>
     </ImageBackground>
         );
     }
@@ -92,7 +91,6 @@ const styles = StyleSheet.create(
         inner:{    
             padding: 24,
             marginBottom:10,
-            backgroundColor: "rgba(255, 255, 255,1)",
             borderRadius:10,
             width:Dimensions.get ('window').width-30,
             justifyContent: "space-around"
@@ -102,20 +100,30 @@ const styles = StyleSheet.create(
         button:{
             flexDirection: "row", 
             alignItems: "center",
-            backgroundColor: "rgba(215, 223, 227, 1)",
+            backgroundColor: "#22BB00",
             padding: 10,
             borderRadius:10,
             color: '#FFFFFF',
-            height: 40,
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 11,
+            },
+            shadowOpacity: 0.55,
+            shadowRadius: 14.78,
+
+            elevation: 22,
         },
  
         input: {
-            height: 40,
-            borderColor: "#134553",
-            borderBottomWidth: 2,
-            borderRadius:8,
+            borderColor: "#fff",
+            borderWidth: 2,
+            borderRadius:5,
             marginBottom:30,
             fontSize: 20,
+            padding:10,
+            backgroundColor:'#fff',
+            
 
           },
           
@@ -123,12 +131,12 @@ const styles = StyleSheet.create(
             fontSize:25,
             alignItems: 'center',
             fontWeight: 'bold',
-            color: '#134553',
+            color: '#fff',
             marginBottom:10,
 
         },
         back:{
-            color: '#808B96',
+            color: '#fff',
             marginBottom:30,
             fontSize: 20,
 

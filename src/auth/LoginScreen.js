@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
-import { Text, View, SafeAreaView, Linking,TouchableOpacity,Image ,StyleSheet,ImageBackground,TextInput, Alert} from 'react-native';
+import { Text, View, SafeAreaView, ScrollView,TouchableOpacity,Image ,StyleSheet,ImageBackground,TextInput, Alert} from 'react-native';
 import axios from 'axios'
 import { KeyboardAvoidingView } from 'react-native';
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from "expo-linear-gradient"; 
+
 
 
 /////Guardado en Memoria 
@@ -25,8 +28,10 @@ export class LoginScreen extends Component {
           };
         }; 
         
+        
     render() {   
 
+        
         ///Si ya existe la sesion entrara de one xd
         const getData = async () => {
             try {
@@ -47,7 +52,7 @@ export class LoginScreen extends Component {
 
         console.log(token);
         const obj = {"cedula" : cedula, "password" : password, "token" :token}
-        const respuesta = await axios.post('http://clientes.emapad.gob.ec/Manager/usuario.php/',obj);
+        const respuesta = await axios.post('http://181.196.241.243/Manager/usuario.php/',obj);
         const validacion = respuesta.data.msg;
         if(validacion == '1'){
             this.props.navigation.navigate('HomeApp');
@@ -59,59 +64,61 @@ export class LoginScreen extends Component {
     }  
 
         return (
-        <ImageBackground style={styles.container}  source={require('../assets/wallpaper_factura.png')} >
-            <KeyboardAvoidingView  behavior="padding"  enabled>
-            <SafeAreaView style={{ flex: 1 }}>
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Image style={styles.Logo} source={require('../assets/lo.png')}/>
-                <View style={styles.texti}> 
-                    <Image style={styles.Icons} source={require('../assets/icons/user.png')}/>         
-                    <TextInput
-                        style={styles.input}
-                        autoCapitalize='none'
-                        onChangeText={(user) => {this.setState({user:user})}}
-                        placeholder="Numero de Cedula"
-                        placeholderTextColor="rgba(255,255,255, 0.9)"
-                        underlineColorAndroid="transparent"
-                        keyboardType="numeric"
-                    />
-                </View>   
-                <SafeAreaView  style={styles.texti}>
-                    <Image style={styles.Icons} source={require('../assets/icons/pass.png')}/>   
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(pass) => {this.setState({pass:pass})}}
-                        placeholder="Contraseña"
-                        secureTextEntry
-                        placeholderTextColor="rgba(255,255,255, 0.9)"
-                        underlineColorAndroid="transparent"
-                    />
-                </SafeAreaView>             
-     
-                <TouchableOpacity
-                style={styles.button}
-                onPress={login_x}
-                >
+        <ImageBackground style={styles.container}  source={require('../assets/fondo.jpg')} >
+            <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={styles.linearGradient} >
+                <KeyboardAvoidingView  behavior="padding"  enabled>
+                <View style={styles.subcontenedor}>
+                    <Image style={styles.Logo} source={require('../assets/lo.png')}/>
+                    <Text style={styles.texto_ba}>Ingresa o registrate con el numero de cedula del propietario de la guía.</Text>
+                    <View style={styles.texti}> 
+                        <MaterialCommunityIcons name="account-circle" color='#505050' size={30} />
+                        <TextInput
+                            style={styles.input}
+                            autoCapitalize='none'
+                            onChangeText={(user) => {this.setState({user:user})}}
+                            placeholder="Numero de Cedula"
+                            placeholderTextColor="#505050"
+                            underlineColorAndroid="transparent"
+                            keyboardType="numeric"
+                        />
+                    </View>   
+                    <SafeAreaView  style={styles.texti}>
+                        <MaterialCommunityIcons name="key" color='#505050' size={30} />
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={(pass) => {this.setState({pass:pass})}}
+                            placeholder="Contraseña"
+                            secureTextEntry
+                            placeholderTextColor="#505050"
+                            underlineColorAndroid="transparent"
+                        />
+                    </SafeAreaView>             
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={login_x}
+                    >
+                    <Text style={{fontWeight:'bold',fontSize:15}}>Ingresar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.buttonregister}
+                        onPress={() => this.props.navigation.navigate('Register')}
+                        >
+                        <Text style={{fontWeight:'bold',fontSize:15}}>Registrarse</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                            onPress={() => this.props.navigation.navigate('Recovery')}
+                    >
+                        <Text style={styles.back}> ¿Se te olvidó tu contraseña?</Text>
+                    </TouchableOpacity>
+                    <Text style={{color:'#fff',fontSize:13, marginTop:20}}>Desarrollado por Luigy Miranda.</Text>
+                    <Text style={{color:'#fff',fontSize:13, marginTop:2}}>Copyright © 2022 Emapad-EP.</Text>
 
-                <Text>Ingresar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                style={styles.buttonregister}
-                onPress={() => this.props.navigation.navigate('Register')}
-                >
-                <Text>Registrarse</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('Recovery')}
-                >
-                <Text style={styles.back}> ¿Se te olvidó tu contraseña?</Text>
-                </TouchableOpacity>
-            </View>
+                </View>
+                
 
-            </SafeAreaView>
+            </KeyboardAvoidingView>
 
-        </KeyboardAvoidingView>
-    
+            </LinearGradient> 
 
         </ImageBackground>
         
@@ -126,21 +133,34 @@ const styles = StyleSheet.create(
     {
         container:{
             flex:1,
+        },
+        subcontenedor:{
+            height:'100%',
+            justifyContent: 'center', 
             alignItems: 'center',
-            justifyContent: 'center',
+            textAlign:'center'
         },
         Logo:{
-            width:240,
-            height:240,
+            width:200,
+            height:200,
         },
-        Icons:{
-            width:35,
-            height:35,
-        },        
+      
         back:{
-            marginTop: 15,
-            color: '#808B96',
+            marginTop: 5,
+            color: '#fff',
             fontSize: 18,
+            fontWeight:'bold'
+        },
+        texto_ba:{
+            color:'#fff',
+            fontSize:20,
+            fontWeight:'bold',
+            justifyContent: 'center', 
+            alignItems: 'center',
+            textAlign:'center',
+            marginLeft:10,
+            marginRight:10
+            
         },
         back2:{
             alignContent:'center',
@@ -153,20 +173,21 @@ const styles = StyleSheet.create(
         },
         button:{
             alignItems: "center",
-            backgroundColor: "rgba(0, 200, 255, 0.7)",
+            backgroundColor: "rgba(50, 200, 0, 1)",
             color: '#FFFFFF',
             padding: 14,
             width:175,
-            margin: 16,
+            margin: 5,
             borderRadius:8,
+            fontWeight:'bold'
+
         },
         buttonregister:{
             alignItems: "center",
-            backgroundColor: "rgba(255, 240, 0 ,0.6)",
+            backgroundColor: "rgba(255, 240, 0 ,1)",
             color: 'rgba(0, 99, 0, 0.7)',
             padding: 14,
             width:175,
-            margin: 16,
             borderRadius:8,
         },
         input: {
@@ -175,7 +196,7 @@ const styles = StyleSheet.create(
             borderWidth: 0,
             padding: 10,
             fontSize:18,
-            color: '#FFFFFF',
+            color: '#000',
             width: 255,
            
           },       
@@ -183,12 +204,13 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             paddingBottom:0,
             justifyContent: 'center',
-            backgroundColor: 'rgba(0, 155, 219, 0.4)',
+            alignItems:'center',
+            backgroundColor: 'rgba(255, 255, 255, 1)',
             borderWidth: 2,
             borderRadius:8,
             marginTop: 10,
             padding: 5,
-            borderColor: '#85929E'
+            borderColor: '#C0C0C0'
         },
           
           PageTitle:{
