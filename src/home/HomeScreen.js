@@ -7,6 +7,7 @@ import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from "expo-linear-gradient"; 
 
 ///Guardado en Memoria
 
@@ -55,65 +56,49 @@ export class HomeScreen extends Component {
         const image4 = { uri : this.state.setData['photo4']};
         const image5 = { uri : this.state.setData['photo5']};
         return (
-            <ImageBackground  source={require('../assets/wallpaper_factura.png')} style={styles.container}>
-
-  
-                <CustomHeader title="EMAPAD-EP" isHome={true} navigation={this.props.navigation}/>
-                <Animatable.Text animation="fadeInRightBig" style={styles.texto}>{'Bienvenido'}</Animatable.Text>
-                <Animatable.Text animation="fadeInRightBig" style={styles.name}>{nombre}</Animatable.Text>
-                <View style={styles.top}>
-
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate('Consulta')}
-                    >
-                    <MaterialCommunityIcons name="cash-fast" color='#FFFFFF' size={50} />
-                    <Text style={styles.logo_text}>{'¡Consulta tu consumo del Agua Potable!'}</Text>
-                    </TouchableOpacity>
-                    
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate('CONVENIO')}
-                    >
-                        
-                    <MaterialCommunityIcons name="account-cash" color='#FFFFFF' size={50} />
-                    <Text style={styles.logo_text}>{'¡Consulta tu convenio del Agua Potable!'}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate('COACTIVA')}
-
-                    >
-                    <MaterialCommunityIcons name="account-question" color='#FFFFFF' size={50} />
-                    <Text style={styles.logo_text}>{'¿Problemas con coactiva?  Entra aqui'}</Text>
-                    </TouchableOpacity>
-                </View>
-                
-                <View style={styles.sub}>
-                    
-                    <Swiper style={styles.wrapper} autoplay={true}>
-                        <View style={styles.slide1}>
-                        <Image style={styles.noticias} source={image}/>
+            <ImageBackground  source={require('../assets/fondo.jpg')} style={styles.container}>
+                <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={styles.linearGradient} >
+                    <CustomHeader title="EMAPAD-EP" isHome={true} navigation={this.props.navigation}/>
+                    <Animatable.Text animation="fadeInRightBig" style={styles.texto}>{'Bienvenido'}</Animatable.Text>
+                    <Animatable.Text animation="fadeInRightBig" style={styles.name}>{nombre}</Animatable.Text>
+                    <View style={styles.top}>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Consulta')}>
+                            <MaterialCommunityIcons name="cash-fast" color='#FFFFFF' size={50} />
+                            <Text style={styles.logo_text}>{'¡Consulta tu consumo del Agua Potable!'}</Text>
+                        </TouchableOpacity>
                             
-                        </View>
-                        <View style={styles.slide2}>
-                            <Image style={styles.noticias} source={image2}/>
-                        </View>
-                        <View style={styles.slide3}>
-                            <Image style={styles.noticias} source={image3}/>
-                        </View>
-                        <View style={styles.slide4}>
-                            <Image style={styles.noticias} source={image4}/>
-                        </View>
-                        <View style={styles.slide4}>
-                            <Image style={styles.noticias} source={image5}/>
-                        </View>
-                    </Swiper>
-                </View>
-       
-                
-                </ImageBackground>    
-                    );
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('CONVENIO')}>
+                            <MaterialCommunityIcons name="account-cash" color='#FFFFFF' size={50} />
+                            <Text style={styles.logo_text}>{'¡Consulta tu convenio del Agua Potable!'}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('COACTIVA')} >
+                            <MaterialCommunityIcons name="account-question" color='#FFFFFF' size={50} />
+                            <Text style={styles.logo_text}>{'¿Problemas con coactiva?  Entra aqui'}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.sub}>
+                        <Swiper style={styles.wrapper} autoplay={true}>
+                            <View style={styles.slide1}>
+                            <Image style={styles.noticias} source={image}/>
+                                
+                            </View>
+                            <View style={styles.slide2}>
+                                <Image style={styles.noticias} source={image2}/>
+                            </View>
+                            <View style={styles.slide3}>
+                                <Image style={styles.noticias} source={image3}/>
+                            </View>
+                            <View style={styles.slide4}>
+                                <Image style={styles.noticias} source={image4}/>
+                            </View>
+                            <View style={styles.slide4}>
+                                <Image style={styles.noticias} source={image5}/>
+                            </View>
+                        </Swiper>
+                    </View>
+                </LinearGradient>
+            </ImageBackground>    
+        );
     }
 }
 const styles = StyleSheet.create(
@@ -131,7 +116,9 @@ const styles = StyleSheet.create(
             height:Dimensions.get ('window').height/8,
             marginRight:5           
         },
-  
+        linearGradient:{
+            height:'100%'
+        },  
         button:{
             paddingHorizontal: 0,
             paddingVertical: 10,
@@ -143,7 +130,7 @@ const styles = StyleSheet.create(
             alignItems:'center',
             alignContent:'center',
             textAlign:'center',
-            flex:2,
+            flex:1
 
                     },
         logo_text:{
@@ -154,11 +141,11 @@ const styles = StyleSheet.create(
             fontSize:15,
         },
         sub:{
-            maxHeight:'80%',
-            height: '50%',
+            flex:1,
             width: Dimensions.get ('window').width-10,
             marginLeft:5,
-            marginRight:5
+            marginRight:5,
+            marginBottom:5
 
 
         },
@@ -172,12 +159,12 @@ const styles = StyleSheet.create(
         },
         top:{
             flexDirection: "row",
+    
         },
         barner:{
             maxHeight: '100%',
             width: Dimensions.get ('window').width,
             resizeMode: 'stretch',
-
 
         },
         abajo:{

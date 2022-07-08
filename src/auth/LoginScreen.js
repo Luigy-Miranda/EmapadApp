@@ -48,10 +48,9 @@ export class LoginScreen extends Component {
     const login_x = async() => {
         const cedula = this.state.user;
         const password = this.state.pass;
-        const token = (await Notifications.getExpoPushTokenAsync()).data;
-
-        console.log(token);
-        const obj = {"cedula" : cedula, "password" : password, "token" :token}
+        const token = await Notifications.getExpoPushTokenAsync();
+        let token_user = token.data;
+        const obj = {"cedula" : cedula, "password" : password, "token" :token_user}
         const respuesta = await axios.post('http://181.196.241.243/Manager/usuario.php/',obj);
         const validacion = respuesta.data.msg;
         if(validacion == '1'){
@@ -68,7 +67,7 @@ export class LoginScreen extends Component {
             <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={styles.linearGradient} >
                 <KeyboardAvoidingView  behavior="padding"  enabled>
                 <View style={styles.subcontenedor}>
-                    <Image style={styles.Logo} source={require('../assets/lo.png')}/>
+                    <Image style={styles.Logo} source={{ uri :'http://181.196.241.243/Manager/Movil_App/lo.png'}}/>
                     <Text style={styles.texto_ba}>Ingresa o registrate con el numero de cedula del propietario de la guía.</Text>
                     <View style={styles.texti}> 
                         <MaterialCommunityIcons name="account-circle" color='#505050' size={30} />
@@ -179,7 +178,8 @@ const styles = StyleSheet.create(
             width:175,
             margin: 5,
             borderRadius:8,
-            fontWeight:'bold'
+            fontWeight:'bold',
+            marginBottom:10
 
         },
         buttonregister:{
@@ -192,7 +192,6 @@ const styles = StyleSheet.create(
         },
         input: {
             height: 40,
-            
             borderWidth: 0,
             padding: 10,
             fontSize:18,

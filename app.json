@@ -2,7 +2,7 @@
   "expo": {
     "name": "Emapad",
     "slug": "Emapad",
-    "version": "5.0.5",
+    "version": "5.0.6",
     "orientation": "portrait",
     "icon": "./assets/adaptive-icon.png",
     "notification": {
@@ -34,7 +34,7 @@
         "USER_FACING_NOTIFICACIONS"
       ],
       "package": "com.emapad.app",
-      "versionCode": 9
+      "versionCode": 10
     },
     "web": {
       "favicon": "./assets/adaptive-icon.png"

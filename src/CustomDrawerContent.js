@@ -31,7 +31,7 @@ export class CustomDrawerContent extends Component {
         return (
             <SafeAreaView style={{flex: 1}}>
             <View style={{height: 150, alignItems: 'center', justifyContent: 'center'}}>
-            <Image style={styles.Logo} source={require('./assets/logo.png')}/>
+            <Image style={styles.Logo} source={{ uri :'http://181.196.241.243/Manager/Movil_App/logo.png'}}/>
             </View>
             <ScrollView style={{marginLeft: 5}}>
             <TouchableOpacity

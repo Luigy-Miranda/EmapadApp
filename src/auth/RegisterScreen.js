@@ -1,10 +1,9 @@
 
-import React, {Component, useState} from 'react'
+import React, {Component, useState,useEffect} from 'react'
 import { Text, View,TouchableOpacity,ImageBackground , Image,Dimensions,StyleSheet,TextInput,KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard} from 'react-native';
 import axios from 'axios'
 import {CustomHeader} from '../index'
 import * as Notifications from 'expo-notifications';
-import * as Permission from "expo-permissions";
 import variables from '../global/variables.js';
 import { LinearGradient } from "expo-linear-gradient"; 
 
@@ -21,15 +20,21 @@ export class RegisterScreen extends React.Component {
             validated : false,
             toke: ''
         }
-     
+       
     render() {
-      const register = async() => {
-        const token = (await Notifications.getExpoPushTokenAsync()).data;
 
+          
+
+
+      const register = async() => {
+
+        const token = await Notifications.getExpoPushTokenAsync();
+        let token_user = token.data;
+        ///console.log('El token es: '+token.data);
         const cedula = this.state.getcedula;
         const correo = this.state.getcorreo;
         const password = this.state.getpass;
-        const obj = {"cedula" : cedula,"correo" : correo, "password" : password, "token":token}
+        const obj = {"cedula" : cedula,"correo" : correo, "password" : password, "token":token_user}
         const respuesta = await axios.post('http://181.196.241.243/Manager/usuario.php/',obj);
         const validacion = respuesta.data.msg;
         this.props.navigation.navigate('Login')
@@ -78,7 +83,7 @@ export class RegisterScreen extends React.Component {
                             <Text style={{fontWeight:'bold', marginLeft:10,fontSize:17, color:'#fff'}}>Registrarse</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                            <Text style={styles.back}> Ya tengo una cuenta</Text>
+                            <Text style={styles.back}>Ya tengo una cuenta</Text>
                         </TouchableOpacity>
 
             

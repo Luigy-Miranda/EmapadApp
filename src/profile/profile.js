@@ -15,6 +15,7 @@ import axios from 'axios';
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from "expo-linear-gradient"; 
 
 ///Guardado en Memoria
 
@@ -49,67 +50,63 @@ export class PROFILE extends Component {
         this.obtener()
 
         return (
-            <ImageBackground source={require('../assets/wallpaper_factura.png')} style={styles.container} resizeMode="cover" >
- 
+            <ImageBackground   source={require('../assets/fondo.jpg')} ssstyle={styles.container}>
+                <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={{height:'100%'}} >
+   
                 <CustomHeader title="Facturas" navigation={this.props.navigation}/>
                 <View style={styles.ban}>
                     <View style={styles.ima}>
                         <MaterialCommunityIcons name="account-circle" color='#fff' size={100} />
                         <View style={styles.top}>
                             <Text style={styles.nombre}>{this.state.setData['NOMBRES']}</Text>
+                                <Text style={styles.SubText}>{this.state.setData['SECDES']}</Text> 
+                            
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={() => this.props.navigation.navigate('update')}
+                                onPress={() => this.props.navigation.navigate('UPDATE')}
                                 >
                                 <MaterialCommunityIcons name="content-save-edit-outline" color='#fff' size={30} />  
                                 <Text style={{color:'#fff', fontSize:15, marginLeft:10}}>Actualizar datos</Text>
                             </TouchableOpacity>       
                         </View>
                     </View>
-                    <Text style={styles.nombre}>Datos personales del cliente</Text>
+                    <Text style={{fontWeight: 'bold', fontSize:20,color: '#FFFFFF', paddingLeft:15}}>Datos personales del cliente</Text>
 
                     <View style={styles.bottom}>
                         <View style={styles.bottomItemIneer}>
                             <View style={styles.texti}> 
                                 <MaterialCommunityIcons name="shield-check" color='#fff' size={30} />
-                                <Text style={styles.textotitulo}> Número del Servicio: </Text>
-                            </View>
-                            <View style={styles.texti}>
-                                <Text style={styles.SubText}>{this.state.setData['SERVICIO']}</Text>
+                                <View style={styles.contenedor_texto}>
+                                    <Text style={styles.textotitulo}> Número del Servicio: </Text>
+                                    <Text style={styles.SubText}> {this.state.setData['SERVICIO']}</Text>
+                                </View>
                             </View>
                             <View style={styles.texti}>
                                 <MaterialCommunityIcons name="map-marker-account" color='#fff' size={30} />
-                                <Text style={styles.textotitulo}> Dirección:</Text>
-                            </View>
-                            <View style={styles.texti}>
+                                <View style={styles.contenedor_texto}>
+                                    <Text style={styles.textotitulo}> Dirección:</Text>
                                     <Text style={styles.SubText}>{this.state.setData['DIRECCION']}</Text>
+                                </View>
                             </View>
                             <View style={styles.texti}>
                                 <MaterialCommunityIcons name="email" color='#fff' size={30} />
-                                <Text style={styles.textotitulo}> Correo: </Text>
-                            </View>
-                            <View style={styles.texti}>
-                                <Text style={styles.SubText}>{this.state.setData['correo']}</Text>
+                                <View style={styles.contenedor_texto}>
+                                    <Text style={styles.textotitulo}> Correo: </Text>
+                                    <Text style={styles.SubText}> {this.state.setData['correo']}</Text>
+                                </View>
                             </View>
                             <View style={styles.texti}>
                                 <MaterialCommunityIcons name="phone" color='#fff' size={30} />
-                                <Text style={styles.textotitulo}> Celular:</Text>
-                            </View>
-                            <View style={styles.texti}>
-                                <Text style={styles.SubText}>{this.state.setData['celular']}</Text>
-                            </View>
-                            <View style={styles.texti}>
-                                <MaterialCommunityIcons name="map-outline" color='#fff' size={30} />
-                                <Text style={styles.textotitulo}> Zona: </Text>
-                            </View>
-                            <View style={styles.texti}>
-                                <Text style={styles.SubText}>{this.state.setData['SECDES']}</Text> 
+                                <View style={styles.contenedor_texto}>
+                                    <Text style={styles.textotitulo}> Celular:</Text>
+                                    <Text style={styles.SubText}> {this.state.setData['celular']}</Text>
+                                </View>
                             </View>
                         </View>                    
                     </View>
                 </View>
-     
-            </ImageBackground>
+            </LinearGradient>
+        </ImageBackground>
         );
     }
 }
@@ -133,7 +130,7 @@ const styles = StyleSheet.create(
         },  
         ima:{
             flexDirection:'row',
-            alignItems:'center'
+            alignItems:'center',
 
         },
  
@@ -151,29 +148,28 @@ const styles = StyleSheet.create(
 
         },
         ban:{
-            paddingLeft: 15,
+            flex:1,
             width:Dimensions.get ('window').width-30,
+
         },
 
 
         center:{
             height:'10%',
             backgroundColor:'rgba(255,255,255, 1)',
-
             borderRadius: 20
 
         },
         bottom:{
             marginTop:10 ,
-            width:Dimensions.get ('window').width-30,
-         
+            width:Dimensions.get ('window').width,
             flexDirection:'row',
             paddingLeft: 15,
-            borderRadius: 10,
-            backgroundColor:'rgba(232, 232, 232,0.2)',
+            flex:1,
+
         },
         bottomItem:{
-          
+
         },
         nombre:{
             fontWeight: 'bold',
@@ -182,15 +178,22 @@ const styles = StyleSheet.create(
 
         },  
         bottomItemIneer:{
-            padding:5
+            flex:1,
+
         }, 
         texti:{
             flexDirection: 'row',
-            marginTop: 5,
+            marginTop: 2,
+            width:Dimensions.get ('window').width-30,
             marginBottom:2,
-            color: '#D9D9D9',
-
+            color: '#fff',
+            borderBottomColor:'#fff',
+            borderBottomWidth:2,
+            alignItems:'center'
         
+        },
+        contenedor_texto:{
+            marginBottom:2
         },
         Logo:{
             width:30,
@@ -198,15 +201,14 @@ const styles = StyleSheet.create(
         },
         SubText:{
             fontSize:20,
-            color: '#BDCCD3',
-            fontWeight: 'bold',
+            color: '#E8E8E8',
 
         }, 
         textotitulo:{
             fontSize:20,
             fontWeight: 'bold',
             padding: 1,
-            color:'#ECECEC'
+            color:'#fff'
         },
         com:{
             fontSize:15,

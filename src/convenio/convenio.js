@@ -15,6 +15,7 @@ import {CustomHeader} from '../index'
 import React, { useState, useEffect, useRef, Component } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from "expo-linear-gradient"; 
 
 ////Variables en Memoria
 const STORAGE_KEY_NAME = 'cedula_usuario'
@@ -59,12 +60,14 @@ export class CONVENIO extends Component {
 
 
         return (
-                <ImageBackground  source={require('../assets/wallpaper_factura.png')} style={styles.container} >
+            <ImageBackground   source={require('../assets/fondo.jpg')} ssstyle={styles.container}>
+                <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={{height:'100%'}} >
+ 
                 <CustomHeader title="Facturas" navigation={this.props.navigation}/>
 
                     <View style={styles.container1}>
                         <View style={styles.xd}>
-                            <Image style={styles.guardian} source={require('../assets/lo.png')}/>
+                            <Image style={styles.guardian} source={{ uri :'http://181.196.241.243/Manager/Movil_App/lo.png'}}/>
                         </View>
                         <Text style={styles.Titulo_con}>Mi convenio</Text>
                         {datos != '' ?
@@ -108,6 +111,7 @@ export class CONVENIO extends Component {
                         </View>
                         :<Text style={styles.PageText}>No hay convenio existente</Text>}
                     </View>
+                    </LinearGradient>
                 </ImageBackground>
         );
     }

@@ -16,6 +16,7 @@ import React, { useState, useEffect, useRef, Component } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Animatable from 'react-native-animatable';
+import { LinearGradient } from "expo-linear-gradient"; 
 
 ////Variables en Memoria
 const STORAGE_KEY_NAME = 'cedula_usuario'
@@ -54,7 +55,9 @@ export class Facturas extends Component {
 
 
         return (
-                <ImageBackground  source={require('../assets/wallpaper_factura.png')} style={styles.container} >
+            <ImageBackground   source={require('../assets/fondo.jpg')} ssstyle={styles.container}>
+            <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={{height:'100%'}} >
+    
                     <CustomHeader title="Facturas" navigation={this.props.navigation}/>
                     <ScrollView>
 
@@ -63,10 +66,10 @@ export class Facturas extends Component {
                             <View   style={styles.botonxd}>
                                 <TouchableOpacity style={styles.button} onPress={generar}>
                                     <Text style={styles.tex}></Text>
-                                    <Image style={styles.pdf} source={require('../assets/icons/pdf.png')}/>
+                                    <Image style={styles.pdf} source={{ uri: 'http://181.196.241.243/Manager/Movil_App/pdf.png'}}/>
                                 </TouchableOpacity>
                             </View>
-                            <Image style={styles.guardian} source={require('../assets/guardian.png')}/>
+                            <Image style={styles.guardian} source={{ uri: 'http://181.196.241.243/Manager/Movil_App/guardian.png'}}/>
                         </View>
 
 
@@ -103,7 +106,7 @@ export class Facturas extends Component {
                                     <Text style={styles.Consumo}>$ {this.state.setData['SALDO_ANTERIOR']}</Text>
                                 </View>
                                 <View style={styles.barner}>
-                                    <Text style={styles.PageText}>Consumo del mes</Text>
+                                    <Text style={styles.PageText}>Consumo mensual</Text>
                                 </View>
                                 <View style={styles.otros}>
                                     <Text style={styles.ValorPendiente}>$ {this.state.setData['CONSUMO_MES']}</Text>
@@ -127,7 +130,7 @@ export class Facturas extends Component {
                         </View>
                     </ScrollView>
  
-
+                    </LinearGradient>
                 </ImageBackground>
 
         );

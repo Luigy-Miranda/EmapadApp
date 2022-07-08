@@ -26,11 +26,17 @@ const Tab = createBottomTabNavigator();
 const navOptionHandler = () => ({
   headerShown: false
 })
+const screenOptionStyle = {
+  headerStyle: {
+    backgroundColor: "#9AC4F8",
+  },
+  headerTintColor: "Back",
+  headerBackTitle: "Back",
+};
 
-
-function Ati_B() {
+const  BottomTabNavigator = () => {
   return (
-      <Tab.Navigator>
+      <Tab.Navigator >
         <Tab.Screen name="Inicio" component={HomeScreen} 
         options={{
           headerShown: false,
@@ -68,7 +74,7 @@ function DrawerNavigator({navigation}) {
     
     <Drawer.Navigator initialRouteName="MenuTab" 
         drawerContent={() => <CustomDrawerContent navigation={navigation}/>}>
-        <Drawer.Screen name="MenuTab" component={HomeScreen} options={navOptionHandler} />
+        <Drawer.Screen name="MenuTab" component={BottomTabNavigator} options={navOptionHandler} />
         <Drawer.Screen name="Consulta" component={Facturas} options={navOptionHandler}/>
         <Drawer.Screen name="PROFILE" component={PROFILE} options={navOptionHandler}/>
         <Drawer.Screen name="RECLAMOS" component={RECLAMOS} options={navOptionHandler}/>
@@ -81,30 +87,32 @@ function DrawerNavigator({navigation}) {
   )
 }
 
-const StackApp = createStackNavigator()
+const Stack = createStackNavigator()
+
+const MainStackNavigator = () => {
+  return (
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="HomeApp" component={DrawerNavigator}  options={navOptionHandler}/>
+      <Stack.Screen name="Login" component={LoginScreen} options={navOptionHandler}/>
+      <Stack.Screen name="Register" component={RegisterScreen} options={navOptionHandler}/>
+      <Stack.Screen name="RECLAMOS" component={RECLAMOS} options={navOptionHandler}/>
+      <Stack.Screen name="PROFILE" component={PROFILE} options={navOptionHandler}/>
+      <Stack.Screen name="COACTIVA" component={COACTIVA} options={navOptionHandler}/>
+      <Stack.Screen name="Recovery" component={Recovery} options={navOptionHandler}/>
+      <Stack.Screen name="VERIFICATION" component={VERIFICATION} options={navOptionHandler}/>
+      <Stack.Screen name="PASSWORD" component={PASSWORD} options={navOptionHandler}/>
+      <Stack.Screen name="PREGUNTAS" component={PREGUNTAS} options={navOptionHandler}/>
+      <Stack.Screen name="UPDATE" component={UPDATE} options={navOptionHandler}/>
+      <Stack.Screen name="CONVENIO" component={CONVENIO} options={navOptionHandler}/>
+  </Stack.Navigator>
+  );
+}
 
 export default function App() {
 
       return (
         <NavigationContainer>
-
-            <StackApp.Navigator initialRouteName="Login">
-              <StackApp.Screen name="HomeApp" component={DrawerNavigator}  options={navOptionHandler}/>
-              <StackApp.Screen name="Login" component={LoginScreen} options={navOptionHandler}/>
-              <StackApp.Screen name="Register" component={RegisterScreen} options={navOptionHandler}/>
-              <StackApp.Screen name="RECLAMOS" component={RECLAMOS} options={navOptionHandler}/>
-              <StackApp.Screen name="PROFILE" component={PROFILE} options={navOptionHandler}/>
-              <StackApp.Screen name="COACTIVA" component={COACTIVA} options={navOptionHandler}/>
-              <StackApp.Screen name="Recovery" component={Recovery} options={navOptionHandler}/>
-              <StackApp.Screen name="VERIFICATION" component={VERIFICATION} options={navOptionHandler}/>
-              <StackApp.Screen name="PASSWORD" component={PASSWORD} options={navOptionHandler}/>
-              <StackApp.Screen name="PREGUNTAS" component={PREGUNTAS} options={navOptionHandler}/>
-              <StackApp.Screen name="UPDATE" component={UPDATE} options={navOptionHandler}/>
-              <StackApp.Screen name="CONVENIO" component={CONVENIO} options={navOptionHandler}/>
-
- 
-            </StackApp.Navigator>
-
+          <MainStackNavigator />
         </NavigationContainer>
       );
     }

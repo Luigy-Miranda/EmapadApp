@@ -16,6 +16,10 @@ import React, { useState, useEffect, useRef, Component } from 'react';
 import axios from 'axios';
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from "expo-linear-gradient"; 
+
 const STORAGE_KEY_NAME = 'cedula_usuario'
 
 
@@ -65,18 +69,22 @@ export class COACTIVA extends Component {
 
 
         return (
-            <ImageBackground source={require('../assets/wallpaper_factura.png')} style={styles.container} resizeMode="cover" >
+            <ImageBackground   source={require('../assets/fondo.jpg')} ssstyle={styles.container}>
+                <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={{height:'100%'}} >
 
                 <CustomHeader title="Facturas" navigation={this.props.navigation}/>
-                <ScrollView>
 
-                <View style={styles.ban}>
-                <Text style={styles.texto}>{'Estamos aqui para ayudarte '+this.state.setData['NOMBRES']}</Text>
-                <View style={styles.ima}>
-                    <Image style={styles.logo_top} source={require('../assets/icons/help.gif')}/>
+                <View style={{flexDirection:'row' }}>
+                    <Text style={styles.texto}>{'Estamos aqui para ayudarte '+this.state.setData['NOMBRES']}</Text>
+                    <MaterialCommunityIcons name="account" color='#fff' size={100} />
                 </View>
+                <ScrollView>
+                
+                <View style={styles.ban}>
+
+
                 <View style={styles.top}>
-                <SectionList
+                    <SectionList
                     sections={DATA}
                     keyExtractor={(item, index) => item + index}
                     renderItem={({ item }) => <Item title={item} />}
@@ -90,7 +98,7 @@ export class COACTIVA extends Component {
 
             </View>
             </ScrollView>
-
+                        </LinearGradient>
             </ImageBackground>
         );
     }
@@ -187,9 +195,12 @@ const styles = StyleSheet.create(
 
         },
         texto:{
-            fontSize:15,
-            color: '#007AA5',
+            fontSize:22,
+            alignItems: 'center',
             fontWeight: 'bold',
+            padding: 10,
+            color: '#FFFFFF',
+            flex:1
 
         },
         xd:{

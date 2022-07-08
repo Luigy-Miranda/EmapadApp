@@ -7,18 +7,15 @@ import {
     ImageBackground,
     TouchableOpacity,
     Dimensions,
-    TextInput,
-    TouchableWithoutFeedback,
-    KeyboardAvoidingView,
-    Keyboard,
-    Platform
-    , Button
+    TextInput
 } from "react-native";
 import {CustomHeader} from '../index'
 import React, { useState, useEffect, useRef, Component } from 'react';
 import axios from 'axios';
 import variables from '../global/variables.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from "expo-linear-gradient"; 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 ///Guardado en Memoria
 
@@ -50,9 +47,9 @@ export class UPDATE extends Component {
             this.props.navigation.navigate('profile');
             }
         return (
-            <ImageBackground source={require('../assets/wallpaper_factura.png')} style={styles.container} resizeMode="cover" >
-
-                <CustomHeader title="Facturas" navigation={this.props.navigation}/>
+            <ImageBackground   source={require('../assets/fondo.jpg')} ssstyle={styles.container}>
+            <LinearGradient colors={["rgba(0, 109, 255,0.8)", "rgba(83, 120, 149,0.8)"]} start={[0.9, 0.9]} style={{height:'100%'}} >
+              <CustomHeader title="Facturas" navigation={this.props.navigation}/>
                 <View style={styles.ban}>
 
 
@@ -64,7 +61,7 @@ export class UPDATE extends Component {
                     <View style={styles.bottomItem}>
                         <View style={styles.bottomItemIneer}>
                             <View style={styles.texti}>
-                                <Image style={styles.Logo} source={require('../assets/icons/email.png')}/>
+                                <MaterialCommunityIcons name="email" color='#fff' size={30} />
                                 <Text style={styles.textotitulo}> Correo </Text>
                             </View>
                             <View style={styles.te}>
@@ -83,7 +80,7 @@ export class UPDATE extends Component {
 
                             </View>
                             <View style={styles.texti}>
-                                <Image style={styles.Logo} source={require('../assets/icons/phone.png')}/>
+                                <MaterialCommunityIcons name="email" color='#fff' size={30} />
                                 <Text style={styles.textotitulo}> Celular </Text>
                             </View>
                             <View style={styles.te}>
@@ -96,17 +93,15 @@ export class UPDATE extends Component {
                             />
 
                             </View>
-                            <TouchableOpacity
-                                style={styles.button}
-                                onPress={Asincronica_Enviar}
-                                >
-                                <Text>Aceptar</Text>
+                            <TouchableOpacity style={styles.button} onPress={Asincronica_Enviar} > 
+                                <MaterialCommunityIcons name="sync-circle" color='#fff' size={30} />
+                                <Text style={{color:'#fff',fontWeight:'bold'}}>Actualizar</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
             </View>
-
+            </LinearGradient>
             </ImageBackground>
         );
     }
@@ -133,7 +128,6 @@ const styles = StyleSheet.create(
         innerx:{
             padding: 24,
             marginBottom:10,
-            backgroundColor: "rgba(232, 232, 232,0.5)",
             borderRadius:10,
             width:Dimensions.get ('window').width-30,
             justifyContent: "space-around",
@@ -153,14 +147,27 @@ const styles = StyleSheet.create(
         te: {
             flexDirection: 'row',
             padding:5,
-            marginLeft:10,
+            borderColor:'#fff',
           },
         button:{
+            flexDirection: "row", 
             alignItems: "center",
-            backgroundColor: "rgba(73, 174, 249,1)",
-            padding: 10,
-            margin: 12,
-            borderRadius:8,
+            marginTop:20,
+            backgroundColor: "#22BB00",
+           
+            padding: 5,
+            justifyContent:'center',
+            borderRadius:10,
+            color: '#FFFFFF',
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 11,
+            },
+            shadowOpacity: 0.55,
+            shadowRadius: 14.78,
+
+            elevation: 22,
         },
         Icons:{
             width:25,
@@ -170,15 +177,7 @@ const styles = StyleSheet.create(
             paddingLeft: 15,
             width:Dimensions.get ('window').width-30,
         },
-        profileimage:{
-            width: 75,
-            height: 75,
-            borderRadius: 100,
-            borderWidth: 4,
-            backgroundColor: '#eee',
-            borderColor: '#FFFFFF',
 
-        },
 
         center:{
             height:'10%',
@@ -191,14 +190,11 @@ const styles = StyleSheet.create(
             width:Dimensions.get ('window').width-30,
             height:'60%',
             flexDirection:'row',
-            flexWrap: 'wrap',
             paddingLeft: 15,
             borderRadius: 10,
-            backgroundColor:'rgba(232, 232, 232,0.5)',
         },
         bottomItem:{
             flex:1,
-            height: 100
         },
         nombre:{
             fontWeight: 'bold',
@@ -234,14 +230,17 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
             padding:5,
             width:300,
-            borderWidth:1,
-            borderRadius:5
+            borderWidth:2,
+            borderRadius:5,
+            backgroundColor:'#fff',
+            borderColor:'#fff'
 
         },
         textotitulo:{
             fontSize:20,
             fontWeight: 'bold',
             padding: 1,
+            color:'#fff'
 
         },
         com:{

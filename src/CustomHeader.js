@@ -22,7 +22,7 @@ export class CustomHeader extends Component {
                 style={{flexDirection: 'row', alignItems: 'center', padding:10}}
                 onPress={() => navigation.goBack()}
                 >
-                          <MaterialCommunityIcons name="chevron-left-circle" color='#888888' size={30} />
+                          <MaterialCommunityIcons name="chevron-left-circle" color='#fff' size={30} />
 
                     <Text style={{fontWeight:'bold', color:'#FFFFFF', marginLeft:10}}>Atras</Text>
                 </TouchableOpacity>
